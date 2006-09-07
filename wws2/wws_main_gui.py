@@ -133,11 +133,9 @@ class wwsMainFrame(wx.Frame):
         locator = Pyro.naming.NameServerLocator()
         ns = locator.getNS(host = Config.NS_Host, port = Config.NS_Port)
         uri1 = ns.resolve(':wws.main')
-        uri2 = ns.resolve(':wws.db')
-        uri3 = ns.resolve(':wws.mail')
+        uri2 = ns.resolve(':wws.mail')
         self.wws = uri1.getProxy()
-        self.db = uri2.getProxy()
-        self.mail = uri3.getProxy()
+        self.mail = uri2.getProxy()
         self.wwsLogin()
         try:
             self.rights = self.user['Rechte']
@@ -220,7 +218,7 @@ class wwsMainFrame(wx.Frame):
             user = pw_dlg.user
             passwd = base64.b64encode(pw_dlg.pw)
             print 'Daten geholt: User(%s), Passwort(*****)' % user
-            self.user = self.db.login(user, passwd)
+            self.user = self.wws.login(user, passwd)
             if self.user != False:
                 pw_dlg.Destroy()
                 self.setStatus(self.user.name_lang, 'middle')
