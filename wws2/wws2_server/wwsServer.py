@@ -31,11 +31,6 @@ class wwsMain_wrapper(Pyro.core.ObjBase, wwsMain.wwsMain):
         Pyro.core.ObjBase.__init__(self)
         wwsMain.wwsMain.__init__(self)
 
-class SimpleDB_wrapper(Pyro.core.ObjBase, SimpleDB.SimpleDB):
-    def __init__(self):
-        Pyro.core.ObjBase.__init__(self)
-        SimpleDB.SimpleDB.__init__(self)
-
 class myMail_wrapper(Pyro.core.ObjBase, myMail.myMail):
     def __init__(self):
         Pyro.core.ObjBase.__init__(self)
@@ -109,8 +104,7 @@ def main():
     uri1 = daemon.connect(testclass(),":test.simple")
     # Gruppe :wws
     uri2 = daemon.connect(wwsMain_wrapper(), ':wws.main')
-    uri3 = daemon.connect(SimpleDB_wrapper(), ':wws.db')
-    uri4 = daemon.connect(myMail_wrapper(), ':wws.mail')
+    uri3 = daemon.connect(myMail_wrapper(), ':wws.mail')
     print 'Daemon 1 wurde gestartet ...'
     # Server in der Hauptschleife laufen lassen
     daemon.requestLoop()
