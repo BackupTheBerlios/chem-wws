@@ -76,4 +76,11 @@ class wwsMain(SimpleDB.SimpleDB):
             elif 'ean' == field.lower():
                 sql += " %s LIKE '%s'" % (field, tmp[0])
         elif 'inventar' == table:
-            # Weitermachen
+            counter = 1
+            for search in tmp:
+                sql += " %s LIKE '%s'" % (field, search)
+                if counter < len(tmp):
+                    sql += " OR"
+                counter += 1
+        elif 'literatur' == table:
+            # Weiter ...
